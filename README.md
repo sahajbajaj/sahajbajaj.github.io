@@ -1,16 +1,8 @@
-# basics
+# Automation Demo
 
-A new Flutter project.
+This is a **todo website** to **test automation**
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Purpose for this is to
+- Better undersatnding of Javascript
+- Increased testing knowledge
+- Become familiar with automation tools and framework
