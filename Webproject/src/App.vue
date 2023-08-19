@@ -48,7 +48,7 @@ onMounted(() => {
   <main class="app">
     <section class="greeting">
       <h2 class="title">
-        What's up, <input type="text" placeholder="Name here" v-model="name"/>
+        What's up, <input type="text" placeholder="Name here" v-model="name" id="title"/>
       </h2>
     </section>
 
@@ -56,25 +56,25 @@ onMounted(() => {
       <h3>CREATE A TODO</h3>
       <form @submit.prevent="addTodo">
         <h4>What's on your todo list?</h4>
-        <input type="text" placeholder="e.g. make a video" v-model="input_content"/>
+        <input type="text" placeholder="e.g. make a video" v-model="input_content" id="todoInput"/>
 
         <h4>Pick a category</h4>
 
         <div class="options">
           <label>
-            <input type="radio" name="category" value="business" v-model="input_category" />
-            <span class="bubble business"></span>
+            <input type="radio" name="category" value="business" v-model="input_category" id="business" />
+            <span class="bubble business" id="businessbutton"></span>
             <div>Business</div>
           </label>
 
           <label>
-            <input type="radio" name="category" value="personal" v-model="input_category" />
-            <span class="bubble personal"></span>
+            <input type="radio" name="category" value="personal" v-model="input_category" id="personal" />
+            <span class="bubble personal" id="personalbutton"></span>
             <div>Personal</div>
           </label>
           
         </div>
-        <input type="submit" value="Add todo" />
+        <input type="submit" value="Add todo" id="addtodo"/>
 
       </form>
     </section>
@@ -87,15 +87,15 @@ onMounted(() => {
         
           <label>
             <input type="checkbox" v-model="todo.done" />
-            <span :class="`bubble ${todo.category}`"></span>
+            <span :class="`bubble ${todo.category}`" id="checkbox"></span>
           </label>
 
           <div class="todo-content">
-            <input type="text" v-model="todo.content">
+            <input type="text" v-model="todo.content" :id="`${todo.content.replace(/\s/g, '').toLowerCase()}Id`">
           </div>
 
           <div class="actions">
-            <button class="delete" @click="removeTodo(todo)">Delete</button>
+            <button class="delete" @click="removeTodo(todo)" :id="`${todo.content.replace(/\s/g, '').toLowerCase()}deleteId`">Delete</button>
           </div>
 
         </div>
