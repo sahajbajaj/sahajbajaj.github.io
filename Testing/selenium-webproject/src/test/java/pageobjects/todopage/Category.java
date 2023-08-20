@@ -1,8 +1,8 @@
 package pageobjects.todopage;
 
 public enum Category {
-    BUSINESS("businessbutton"),
-    PERSONAL("personalbutton");
+    BUSINESS("business"),
+    PERSONAL("personal");
 
     private final String id;
 
