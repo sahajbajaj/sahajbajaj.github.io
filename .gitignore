@@ -13,6 +13,9 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 # Don't add class files
 *.class
 
+# Don't add target folder
+target
+
 # Runtime data
 pids
 *.pid

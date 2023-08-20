@@ -9,9 +9,8 @@ public class TodoNgTest {
     public void testMethod() {
         
         TodoPageObject todoPage = new TodoPageObject();
-        String todoItem = "testtodoitem";
-
-        todoPage.navigate();    
+        
+        String todoItem = "testtodoitem";   
 
         todoPage.inputTitle("Hi Sahaj");
         todoPage.inputTodoItem(todoItem);
