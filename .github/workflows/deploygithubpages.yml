@@ -1,9 +1,9 @@
 name: Build and deploy to GitHub Pages
 
 on:
-  pull_request:
+  push:
     branches:
-      - feature/creating-gh-pages-deployment
+      - feature/creating-gh-pages-deploment
 
 jobs:
   build-and-deploy:
