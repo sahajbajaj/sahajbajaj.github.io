@@ -19,8 +19,22 @@ jobs:
           npm ci
           npm run build
 
-  deploy-application:
+  upload-artifact:
     needs: build-application
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Upload artifact
+        uses: actions/upload-artifact
+        with:
+          name: page
+          path: .
+
+  deploy-application:
+    needs: upload-artifact
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -32,5 +46,4 @@ jobs:
 
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v2
