@@ -9,13 +9,13 @@ jobs:
   build-application-upload-artifact:
     runs-on: ubuntu-latest
 
-    # permissions:
-    #   pages: write
-    #   id-token: write
+    permissions:
+      pages: write
+      id-token: write
 
-    # environment:
-    #   name: github-pages
-    #   url: ${{ steps.deployment.outputs.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout branch
@@ -27,8 +27,15 @@ jobs:
           npm ci
           npm run build
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
         with:
-         folder: Webproject/dist
-         ACCESS_TOKEN: ${{ secrets.GH_DOCS }}
+          name: artifact
+          path: Webproject/dist
+          if-no-files-found: error
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+        with:
+          artifact_name: artifact
