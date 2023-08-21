@@ -21,7 +21,7 @@ jobs:
     #all the names should be their own job
     #like this build-application-upload-artifact:
     #make sure each step "needs" name of previous step
-
+    
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
@@ -32,16 +32,15 @@ jobs:
           npm ci
           npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: artifact
-          path: Webproject/dist
-          if-no-files-found: error
-
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v2
         if: always()
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        if: always()
+        with:
+         path: Webproject/dist
 
       - name: Deploy to github pages
         id: deployment
