@@ -28,9 +28,9 @@ jobs:
 
     steps:
       - name: Upload artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@main
         with:
-          path: ./Webproject/dist/
+          path: Webproject/dist/
 
   deploy-application:
     needs: upload-artifact
