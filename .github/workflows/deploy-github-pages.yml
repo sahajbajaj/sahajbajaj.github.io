@@ -27,16 +27,7 @@ jobs:
           npm ci
           npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          name: artifact
-          path: Webproject/dist
-          if-no-files-found: error
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
-        with:
-          name: artifact
-          path: Webproject/dist
+         folder: dist
