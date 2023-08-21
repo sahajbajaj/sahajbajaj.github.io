@@ -20,6 +20,7 @@ jobs:
           npm run build
 
   deploy-application:
+    needs: build-application
     runs-on: ubuntu-latest
     permissions:
       pages: write
