@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: page
-          path: .
+          path: ./Webproject/dist
 
   deploy-application:
     needs: upload-artifact
