@@ -34,9 +34,23 @@ jobs:
           path: Webproject/dist
           if-no-files-found: error
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v2
+        if: always()
+      - name: Upload artifact
+        uses: actions/upload-pages-artifacts@v1
+        if: always()
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          artifact_name: artifact
+         path: Webproject/dist
+
+      - name: Deploy to github pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+        if: always()
+
+      # - name: Deploy to GitHub Pages
+      #   id: deployment
+      #   uses: actions/deploy-pages@v2
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     artifact_name: artifact
