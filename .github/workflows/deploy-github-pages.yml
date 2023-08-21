@@ -3,7 +3,7 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches:
-      - feature/creating-gh-pages-deployment
+      - feature/creating-gh-pages-deploment
 
 jobs:
   build-application-upload-artifact:
