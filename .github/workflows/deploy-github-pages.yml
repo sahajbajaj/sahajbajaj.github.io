@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: Upload artifact
-        uses: actions/upload-artifact
+        uses: actions/upload-artifact@main
         with:
           name: page
           path: .
