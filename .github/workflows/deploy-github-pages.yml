@@ -17,10 +17,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
-    #all the names should be their own job
-    #like this build-application-upload-artifact:
-    #make sure each step "needs" name of previous step
     
     steps:
       - name: Checkout branch
@@ -35,6 +31,11 @@ jobs:
   setup-gh-pages:
     runs-on: ubuntu-latest
     needs: build-application
+
+    permissions:
+      pages: write
+      id-token: write
+
     steps:
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v2
@@ -43,6 +44,11 @@ jobs:
   upload-artifact:
     runs-on: ubuntu-latest
     needs: setup-gh-pages
+
+    permissions:
+      pages: write
+      id-token: write
+
     steps:    
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
@@ -52,7 +58,12 @@ jobs:
 
   deploy-to-gh-pages:
     runs-on: ubuntu-latest
-    needs: upload-artifact       
+    needs: upload-artifact
+    
+    permissions:
+      pages: write
+      id-token: write
+      
     steps:     
       - name: Deploy to github pages
         id: deployment
