@@ -7,7 +7,7 @@ on:
       #change to main
 
 jobs:
-  build-application:
+  build-application-upload-artifact:
     runs-on: ubuntu-latest
 
     permissions:
@@ -16,8 +16,12 @@ jobs:
 
     environment:
       name: github-pages
-      url: ${{ steps.setup-github-pages.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
 
+    #all the names should be their own job
+    #like this build-application-upload-artifact:
+    #make sure each step "needs" name of previous step
+    
     steps:
       - name: Checkout branch
         uses: actions/checkout@v2
@@ -28,45 +32,17 @@ jobs:
           npm ci
           npm run build
 
-  setup-github-pages: 
-    runs-on: ubuntu-latest
-    needs: build-application 
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-
-    steps:  
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v2
         if: always()
 
-  upload-artifact: 
-    runs-on: ubuntu-latest
-    needs: setup-github-pages 
-    permissions:
-      pages: write
-      id-token: write
-      
-    steps:        
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-pages-artifact@v1
         if: always()
         with:
-          name: web-artifact
-          path: Webproject/dist
+         path: Webproject/dist
 
-  deploy-github-pages: 
-    runs-on: ubuntu-latest
-    needs: upload-artifact
-    permissions:
-      pages: write
-      id-token: write
-              
-    steps:                                   
-      - name: Deploy to GitHub Pages
+      - name: Deploy to github pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v1
         if: always()
