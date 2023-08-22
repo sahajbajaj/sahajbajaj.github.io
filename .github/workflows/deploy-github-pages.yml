@@ -36,6 +36,10 @@ jobs:
       pages: write
       id-token: write
 
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}      
+
     steps:
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v2
@@ -48,6 +52,10 @@ jobs:
     permissions:
       pages: write
       id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}      
 
     steps:    
       - name: Upload artifact
@@ -63,7 +71,11 @@ jobs:
     permissions:
       pages: write
       id-token: write
-      
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}      
+
     steps:     
       - name: Deploy to github pages
         id: deployment
