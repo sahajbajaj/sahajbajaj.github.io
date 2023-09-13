@@ -22,7 +22,7 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy-website:
-    name: Build website application
+    name: Build, upload artifact and deploy website
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -45,27 +45,18 @@ jobs:
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v3
-        
-  upload-website-artifact:
-    name: Upload website artifact files
-    needs: deploy-website
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload dist repository
-          path: './'
+          path: 'Webproject/dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
 
   run-selenium:
     runs-on: ubuntu-latest
-    needs: upload-website-artifact
+    needs: deploy-website
     name: Run Selenium tests
     steps:
       - uses: actions/checkout@v3
