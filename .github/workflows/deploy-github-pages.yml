@@ -22,7 +22,7 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy-website:
-    name: Publish app to github pages
+    name: Build website application
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -47,7 +47,7 @@ jobs:
         uses: actions/configure-pages@v3
         
   upload-website-artifact:
-    name: Publish app to github pages
+    name: Upload website artifact files
     needs: deploy-website
     environment:
       name: github-pages
