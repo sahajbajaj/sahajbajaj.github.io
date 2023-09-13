@@ -3,8 +3,7 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches:
-      - feature/creating-gh-pages-deploment
-      #change to main
+      - main
 
 jobs:
   build-application:
