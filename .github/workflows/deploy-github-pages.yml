@@ -53,9 +53,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: './Webproject/'
     steps:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
