@@ -3,10 +3,11 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - feature/creating-gh-pages-deploment
+      #change to main
 
 jobs:
-  build-application:
+  build-application-upload-artifact:
     runs-on: ubuntu-latest
 
     permissions:
@@ -16,6 +17,10 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
+    #all the names should be their own job
+    #like this build-application-upload-artifact:
+    #make sure each step "needs" name of previous step
     
     steps:
       - name: Checkout branch
@@ -27,55 +32,16 @@ jobs:
           npm ci
           npm run build
 
-  setup-gh-pages:
-    runs-on: ubuntu-latest
-    needs: build-application
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}      
-
-    steps:
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v2
         if: always()
 
-  upload-artifact:
-    runs-on: ubuntu-latest
-    needs: setup-gh-pages
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}      
-
-    steps:    
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         if: always()
         with:
          path: Webproject/dist
 
-  deploy-to-gh-pages:
-    runs-on: ubuntu-latest
-    needs: upload-artifact
-    
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}      
-
-    steps:     
       - name: Deploy to github pages
         id: deployment
         uses: actions/deploy-pages@v1
