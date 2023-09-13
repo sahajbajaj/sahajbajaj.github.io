@@ -56,7 +56,7 @@ onMounted(() => {
       <h3>CREATE A TODO</h3>
       <form @submit.prevent="addTodo">
         <h4>What's on your todo list?</h4>
-        <input type="text" placeholder="e.g. make a video" v-model="input_content" id="todoInput"/>
+        <input type="text" placeholder="e.g. create a painting" v-model="input_content" id="todoInput"/>
 
         <h4>Pick a category</h4>
 
